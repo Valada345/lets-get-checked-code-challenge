@@ -1,4 +1,5 @@
-<div class="post-container" (click)="navigateToPost()">
+<router-outlet></router-outlet>
+<div class="post-container" *ngIf="!!post">
   <div class="post-header">
     <p>{{ post.title }}</p>
     <div>Posted by {{ post.author }} at {{ post.publish_date }}</div>
@@ -6,6 +7,6 @@
   <p>{{ post.description }}</p>
 
   <div class="post-content" *ngIf="false">
-    <p [innerHTML]="post.content"></p>
+    <p [innerHTML]="post?.content"></p>
   </div>
 </div>

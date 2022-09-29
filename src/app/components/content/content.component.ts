@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Post } from 'src/app/interfaces/interfaces';
 import { ApiService } from 'src/app/services/api.service';
+import { StateService } from 'src/app/services/state/state.service';
 
 @Component({
   selector: 'app-content',
@@ -8,25 +10,21 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./content.component.scss'],
 })
 export class ContentComponent implements OnInit {
-  allPosts: any = null;
+  posts: Post[] | null = null;
   comments: any = null;
 
   private subscriptions: Subscription = new Subscription();
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private stateService: StateService
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions.add(
       this.apiService.getPosts().subscribe((posts) => {
-        this.allPosts = posts;
-        console.log('Posts: ', this.allPosts);
-      })
-    );
-
-    this.subscriptions.add(
-      this.apiService.getCommentsByPost(1).subscribe((comments) => {
-        this.comments = comments;
-        console.log('Comments: ', this.comments);
+        this.posts = this.orderPostsByDate(posts);
+        this.stateService.setPosts(this.posts);
       })
     );
 
@@ -38,16 +36,24 @@ export class ContentComponent implements OnInit {
       user: 'Best',
     }); */
 
-    this.apiService.updateComment(15, {
+    /* this.apiService.updateComment(15, {
       content: 'It kinda works',
       date: '2016-12-10',
       parent_id: null,
       postId: 3,
       user: 'Best',
-    });
+    }); */
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  private orderPostsByDate(posts: Post[]): Post[] {
+    return posts
+      ?.sort((a, b) => {
+        return Date.parse(a.publish_date) - Date.parse(b.publish_date);
+      })
+      .reverse();
   }
 }

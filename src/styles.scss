@@ -1,7 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --background-black-default: black;
+  --background-dark-grey: #141415;
+  --background-grey: #2e2e2e;
+
+  --border-color-grey: #343536;
+  --border-color-light-grey: #929292;
+
+  --post-title-color: #d7dadc;
+  --post-content-color: #818384;
+}
+
 html {
   height: 100%;
   width: 100%;
+}
+
+body {
+  font-family: IBMPlexSans, Arial, sans-serif;
+  background-color: var(--background-black-default);
+
+  color: var(--post-content-color);
 }
 
 body,
@@ -9,4 +27,46 @@ body,
   height: 100%;
   width: 100%;
   margin: 0px;
+}
+
+.post-container {
+  background-color: var(--background-dark-grey);
+  border-radius: 10px;
+  border: 2px solid var(--border-color-grey);
+
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+
+  p,
+  .post-content {
+    margin: 5px 10px 5px 10px;
+  }
+
+  .post-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    p {
+      color: var(--post-title-color);
+      font-weight: 600;
+    }
+
+    div {
+      display: inherit;
+      justify-content: center;
+      align-items: center;
+
+      margin-right: 10px;
+
+      font-size: 12px;
+    }
+  }
+}
+
+.post-container:hover {
+  background-color: var(--background-grey);
+  border-color: var(--border-color-light-grey);
 }
