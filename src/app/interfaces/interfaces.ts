@@ -14,5 +14,5 @@ export interface Comment {
   date: string;
   user: string;
   content: string;
-  parent_id?: number | null;
+  parent_id?: number;
 }

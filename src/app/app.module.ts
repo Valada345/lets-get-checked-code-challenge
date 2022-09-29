@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PostComponent } from './components/content/post/post.component';
 import { ContentComponent } from './components/content/content.component';
 import { HeaderComponent } from './components/header/header.component';
+import { DetailedPostComponent } from './components/detailed-post/detailed-post.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { HeaderComponent } from './components/header/header.component';
     PostComponent,
     ContentComponent,
     HeaderComponent,
+    DetailedPostComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [ApiService],

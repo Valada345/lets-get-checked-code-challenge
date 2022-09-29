@@ -13,6 +13,11 @@ export class ApiService {
     return this.httpClient.get(url);
   }
 
+  getPost(postId: number): Observable<any> {
+    const url = `http://localhost:9000/posts/${postId}`;
+    return this.httpClient.get(url);
+  }
+
   getCommentsByPost(id: number): Observable<any> {
     const url = `http://localhost:9000/posts/${id}/comments`;
     return this.httpClient.get(url);
