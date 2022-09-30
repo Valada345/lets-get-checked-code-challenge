@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { StateService } from 'src/app/services/state/state.service';
 
 @Component({
   selector: 'app-header',
@@ -8,12 +7,11 @@ import { StateService } from 'src/app/services/state/state.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private router: Router, private stateService: StateService) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 
   navigateToHomePage(): void {
     this.router.navigateByUrl('home');
-    this.stateService.setSelectedPost(null);
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Comment } from '../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -32,9 +33,9 @@ export class ApiService {
       postId: number;
       user: string;
     }
-  ) {
+  ): Observable<any> {
     const url = `http://localhost:9000/posts/${postId}/comments`;
-    this.httpClient.post(url, comment).subscribe((res) => console.log(res));
+    return this.httpClient.post<Comment>(url, comment);
   }
 
   updateComment(
