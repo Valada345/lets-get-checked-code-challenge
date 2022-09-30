@@ -1,0 +1,20 @@
+<div>
+  <div class="comment-container">
+    <img src="/assets/user.png" alt="User Icon" class="user-image" />
+    <div class="comment-information">
+      <span class="user">
+        {{ comment.user }}
+        <span class="comment-date"> at {{ comment.date }}</span>
+      </span>
+      <div class="comment-content">
+        {{ comment.content }}
+      </div>
+    </div>
+  </div>
+  EDITING
+  <div class="comment-actions">
+    <div class="comment-action">Reply</div>
+    <div class="comment-action">Edit</div>
+    <div class="comment-action">Delete</div>
+  </div>
+</div>
