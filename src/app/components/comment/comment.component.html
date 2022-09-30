@@ -13,8 +13,51 @@
   </div>
   EDITING
   <div class="comment-actions">
-    <div class="comment-action">Reply</div>
-    <div class="comment-action">Edit</div>
+    <div
+      class="comment-action"
+      (click)="
+        setAsActiveComment.emit({
+          id: comment.id,
+          type: activeCommentType.replying
+        })
+      "
+    >
+      Reply
+    </div>
+    <div
+      class="comment-action"
+      (click)="
+        setAsActiveComment.emit({
+          id: comment.id,
+          type: activeCommentType.editing
+        })
+      "
+    >
+      Edit
+    </div>
     <div class="comment-action">Delete</div>
+    <app-comment-form
+      *ngIf="isReplying()"
+      submitLabel="Reply"
+      (handleCommentSubmit)="
+        addComment.emit({ comment: $event, parentId: replyId })
+      "
+    ></app-comment-form>
+  </div>
+  <div class="replies" *ngIf="replies.length > 0">
+    <app-comment
+      *ngFor="let reply of replies"
+      [comment]="reply"
+      [activeComment]="activeComment"
+      [parentId]="comment.id"
+      [replies]="[]"
+      (setAsActiveComment)="
+        setAsActiveComment.emit({
+          id: comment.id,
+          type: activeCommentType.replying
+        })
+      "
+      (addComment)="addComment.emit($event)"
+    ></app-comment>
   </div>
 </div>

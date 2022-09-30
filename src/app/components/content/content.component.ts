@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Post } from 'src/app/interfaces/interfaces';
 import { ApiService } from 'src/app/services/api.service';
-import { StateService } from 'src/app/services/state/state.service';
 
 @Component({
   selector: 'app-content',
@@ -15,16 +14,12 @@ export class ContentComponent implements OnInit {
 
   private subscriptions: Subscription = new Subscription();
 
-  constructor(
-    private apiService: ApiService,
-    private stateService: StateService
-  ) {}
+  constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
     this.subscriptions.add(
       this.apiService.getPosts().subscribe((posts) => {
         this.posts = this.orderPostsByDate(posts);
-        this.stateService.setPosts(this.posts);
       })
     );
 
@@ -36,11 +31,11 @@ export class ContentComponent implements OnInit {
       user: 'Best',
     }); */
 
-    /* this.apiService.updateComment(15, {
+    /* this.apiService.updateComment(2, {
       content: 'It kinda works',
       date: '2016-12-10',
       parent_id: null,
-      postId: 3,
+      postId: 1,
       user: 'Best',
     }); */
   }

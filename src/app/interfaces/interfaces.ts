@@ -14,5 +14,15 @@ export interface Comment {
   date: string;
   user: string;
   content: string;
-  parent_id?: number;
+  parent_id: number | null;
+}
+
+export interface ActiveComment {
+  id: number;
+  type: ActiveCommentTypeEnum;
+}
+
+export enum ActiveCommentTypeEnum {
+  replying = 'replying',
+  editing = 'editing',
 }
