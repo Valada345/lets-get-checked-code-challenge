@@ -16,6 +16,8 @@ export class CommentFormComponent implements OnInit {
     text: string;
   }>();
 
+  @Output() handleCancel = new EventEmitter<void>();
+
   form!: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {}
@@ -23,12 +25,12 @@ export class CommentFormComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       text: [this.initialText, Validators.required],
-      userName: ['Name', Validators.required],
+      userName: ['', Validators.required],
     });
   }
 
   onSubmit(): void {
-    console.log('Submit: ', this.form.value);
     this.handleCommentSubmit.emit(this.form.value);
+    this.form.reset();
   }
 }

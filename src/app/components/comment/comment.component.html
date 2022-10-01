@@ -6,15 +6,66 @@
         {{ comment.user }}
         <span class="comment-date"> at {{ comment.date }}</span>
       </span>
-      <div class="comment-content">
+      <div class="comment-content" *ngIf="!isEditing()">
         {{ comment.content }}
       </div>
     </div>
   </div>
-  EDITING
-  <div class="comment-actions">
-    <div class="comment-action">Reply</div>
-    <div class="comment-action">Edit</div>
-    <div class="comment-action">Delete</div>
+  <app-comment-form
+    *ngIf="isEditing()"
+    submitLabel="Update"
+    [cancelButton]="true"
+    [initialText]="comment.content"
+    (handleCommentSubmit)="
+      updateComment.emit({ comment: $event, commentId: comment.id })
+    "
+    (handleCancel)="setAsActiveComment.emit(null)"
+  ></app-comment-form>
+  <div class="comment-actions-container">
+    <app-comment-form
+      *ngIf="isReplying()"
+      submitLabel="Reply"
+      [cancelButton]="true"
+      (handleCommentSubmit)="
+        addComment.emit({ comment: $event, parentId: replyId })
+      "
+      (handleCancel)="setAsActiveComment.emit(null)"
+    ></app-comment-form>
+    <div class="comment-actions">
+      <div
+        class="comment-action"
+        (click)="
+          setAsActiveComment.emit({
+            id: comment.id,
+            type: activeCommentType.replying
+          })
+        "
+      >
+        Reply
+      </div>
+      <div
+        class="comment-action"
+        (click)="
+          setAsActiveComment.emit({
+            id: comment.id,
+            type: activeCommentType.editing
+          })
+        "
+      >
+        Edit
+      </div>
+    </div>
+  </div>
+  <div class="replies" *ngIf="replies.length > 0">
+    <app-comment
+      *ngFor="let reply of replies"
+      [comment]="reply"
+      [activeComment]="activeComment"
+      [parentId]="comment.id"
+      [replies]="[]"
+      (setAsActiveComment)="setAsActiveComment.emit($event)"
+      (addComment)="addComment.emit($event)"
+      (updateComment)="updateComment.emit($event)"
+    ></app-comment>
   </div>
 </div>

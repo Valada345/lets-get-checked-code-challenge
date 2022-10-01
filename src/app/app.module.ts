@@ -9,6 +9,9 @@ import { PostComponent } from './components/content/post/post.component';
 import { ContentComponent } from './components/content/content.component';
 import { HeaderComponent } from './components/header/header.component';
 import { DetailedPostComponent } from './components/detailed-post/detailed-post.component';
+import { CommentComponent } from './components/comment/comment.component';
+import { CommentFormComponent } from './components/comment-form/comment-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,8 +20,15 @@ import { DetailedPostComponent } from './components/detailed-post/detailed-post.
     ContentComponent,
     HeaderComponent,
     DetailedPostComponent,
+    CommentComponent,
+    CommentFormComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+  ],
   providers: [ApiService],
   bootstrap: [AppComponent],
 })
