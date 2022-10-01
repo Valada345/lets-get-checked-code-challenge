@@ -1,10 +1,27 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <textarea class="form-textarea" formControlName="text"></textarea>
-  <textarea class="form-textarea" formControlName="userName"></textarea>
+  <textarea
+    class="form-textarea"
+    formControlName="text"
+    placeholder="Once upon a time..."
+  ></textarea>
+  <textarea
+    class="form-textarea name-area"
+    formControlName="userName"
+    placeholder="eg: Tom, John"
+  ></textarea>
 
-  <button class="add-button" type="submit" [disabled]="form.invalid">
-    Add
-  </button>
+  <div class="buttons-container">
+    <button class="add-button" type="submit" [disabled]="form.invalid">
+      Submit
+    </button>
 
-  <button type="button" class="cancle-button">Cancel</button>
+    <button
+      *ngIf="cancelButton"
+      type="button"
+      class="cancel-button"
+      (click)="handleCancel.emit()"
+    >
+      Cancel
+    </button>
+  </div>
 </form>

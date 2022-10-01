@@ -1,0 +1,79 @@
+form {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-textarea {
+  width: 90%;
+  height: 150px;
+  padding: 12px 20px;
+  margin: 5px 10px;
+
+  box-sizing: border-box;
+  border: 2px solid var(--border-color-light-grey);
+  border-radius: 4px;
+  background-color: var(--background-grey);
+  font-size: 16px;
+  color: var(--post-content-color);
+  font-weight: 600;
+  resize: none;
+}
+.name-area {
+  width: 90%;
+  height: 50px;
+}
+
+.buttons-container {
+  margin-right: 70%;
+  width: 140px;
+
+  button {
+    margin: 5px 3px;
+    padding: 5px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  .add-button,
+  .cancel-button {
+    border: 2px solid var(--border-color-grey);
+    border-radius: 4px;
+
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+  }
+
+  .add-button {
+    background-color: var(--post-content-color);
+
+    color: var(--background-dark-grey);
+
+    &:not(.disable):hover {
+      background-color: red;
+    }
+
+    &:enabled:hover {
+      background-color: green;
+    }
+  }
+
+  .add-button:disabled {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+  }
+
+  .cancel-button {
+    background-color: var(--background-dark-grey);
+    color: var(--post-content-color);
+  }
+
+  .cancel-button:hover {
+    background-color: var(--background-grey);
+    border-color: var(--border-color-light-grey);
+  }
+}

@@ -22,6 +22,11 @@ export class CommentComponent implements OnInit {
     parentId: number | null;
   }>();
 
+  @Output() updateComment = new EventEmitter<{
+    comment: { text: string; userName: string };
+    commentId: number;
+  }>();
+
   activeCommentType = ActiveCommentTypeEnum;
   replyId: number | null = null;
 
@@ -39,6 +44,17 @@ export class CommentComponent implements OnInit {
     return (
       this.activeComment.id === this.comment.id &&
       this.activeComment.type === this.activeCommentType.replying
+    );
+  }
+
+  isEditing(): boolean {
+    if (!this.activeComment) {
+      return false;
+    }
+
+    return (
+      this.activeComment.id === this.comment.id &&
+      this.activeComment.type === this.activeCommentType.editing
     );
   }
 }

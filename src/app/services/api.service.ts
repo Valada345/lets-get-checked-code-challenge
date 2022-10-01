@@ -43,12 +43,10 @@ export class ApiService {
     comment: {
       content: string;
       date: string;
-      parent_id: number | null;
-      postId: number;
       user: string;
     }
-  ) {
+  ): Observable<Comment> {
     const url = `http://localhost:9000/comments/${commentId}`;
-    this.httpClient.put(url, comment).subscribe((res) => console.log(res));
+    return this.httpClient.patch<Comment>(url, comment);
   }
 }

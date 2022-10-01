@@ -17,12 +17,13 @@
   ></app-comment-form>
 
   <app-comment
-    *ngFor="let comment of comments"
+    *ngFor="let comment of getRootComments()"
     [comment]="comment"
     [replies]="getReplies(comment)"
     [activeComment]="activeComment"
     (setAsActiveComment)="setAsActiveComment($event)"
     (addComment)="addComment($event)"
+    (updateComment)="updateComment($event)"
     >{{ comment.content }}</app-comment
   >
 </div>

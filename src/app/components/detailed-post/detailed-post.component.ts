@@ -41,7 +41,6 @@ export class DetailedPostComponent implements OnInit {
     this.subscriptions.add(
       this.apiService.getCommentsByPost(postId).subscribe((comments) => {
         this.comments = comments;
-        console.log('comments: ', this.comments);
       })
     );
   }
@@ -72,6 +71,31 @@ export class DetailedPostComponent implements OnInit {
       });
   }
 
+  updateComment({
+    comment,
+    commentId,
+  }: {
+    comment: { text: string; userName: string };
+    commentId: number;
+  }) {
+    const commentToPost = {
+      content: comment.text,
+      user: comment.userName,
+      date: new Date().toISOString().slice(0, 10),
+    };
+    this.apiService
+      .updateComment(commentId, commentToPost)
+      .subscribe((updatedComment) => {
+        this.comments = this.comments.map((comment) => {
+          if (comment.id === commentId) {
+            return updatedComment;
+          }
+          return comment;
+        });
+        this.activeComment = null;
+      });
+  }
+
   setAsActiveComment(active: ActiveComment | null): void {
     this.activeComment = active;
   }
@@ -80,5 +104,9 @@ export class DetailedPostComponent implements OnInit {
     return this.comments.filter(
       (comment) => comment.parent_id === providedComment.id
     );
+  }
+
+  getRootComments(): Comment[] {
+    return this.comments.filter((comment) => comment.parent_id === null);
   }
 }

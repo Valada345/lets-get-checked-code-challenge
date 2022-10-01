@@ -44,11 +44,16 @@
   }
 }
 
-.comment-actions {
+.comment-actions-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: end;
   margin-right: 40px;
+
+  .comment-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
 
   .comment-action {
     padding: 5px;
