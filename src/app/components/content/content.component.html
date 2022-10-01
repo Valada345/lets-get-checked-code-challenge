@@ -1,4 +1,5 @@
 <div class="center">
+  <span *ngIf="!posts" class="error-message">{{ EmptyPostsMessage }}</span>
   <div *ngFor="let post of posts" class="post">
     <app-post [post]="post"></app-post>
   </div>

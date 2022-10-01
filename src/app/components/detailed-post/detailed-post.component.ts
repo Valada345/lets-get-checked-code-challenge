@@ -4,16 +4,6 @@ import { Subscription } from 'rxjs';
 import { Post, Comment, ActiveComment } from 'src/app/interfaces/interfaces';
 import { ApiService } from 'src/app/services/api.service';
 
-const defaultPost: Post = {
-  author: '',
-  content: '',
-  description: '',
-  id: -1,
-  publish_date: '',
-  slug: '',
-  title: '',
-};
-
 @Component({
   selector: 'app-detailed-post',
   templateUrl: './detailed-post.component.html',
@@ -32,9 +22,14 @@ export class DetailedPostComponent implements OnInit {
     const postId = Number(this.router.url.split('/').pop());
     if (!this.post) {
       this.subscriptions.add(
-        this.apiService.getPost(postId).subscribe((post) => {
-          this.post = post;
-        })
+        this.apiService.getPost(postId).subscribe(
+          (post) => {
+            this.post = post;
+          },
+          () => {
+            this.router.navigateByUrl('home');
+          }
+        )
       );
     }
 

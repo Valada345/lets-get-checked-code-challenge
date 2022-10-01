@@ -12,6 +12,8 @@ export class ContentComponent implements OnInit {
   posts: Post[] | null = null;
   comments: any = null;
 
+  EmptyPostsMessage = 'There are no posts at the moment :(';
+
   private subscriptions: Subscription = new Subscription();
 
   constructor(private apiService: ApiService) {}
@@ -22,22 +24,6 @@ export class ContentComponent implements OnInit {
         this.posts = this.orderPostsByDate(posts);
       })
     );
-
-    /* this.apiService.addComment(2, {
-      content: 'string',
-      date: '2016-12-10',
-      parent_id: null,
-      postId: 3,
-      user: 'Best',
-    }); */
-
-    /* this.apiService.updateComment(2, {
-      content: 'It kinda works',
-      date: '2016-12-10',
-      parent_id: null,
-      postId: 1,
-      user: 'Best',
-    }); */
   }
 
   ngOnDestroy(): void {
